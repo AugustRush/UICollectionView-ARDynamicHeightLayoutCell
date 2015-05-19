@@ -26,4 +26,4 @@ if you using UITableView ,you should use 'https://github.com/forkingdog/UITableV
 
 ## Install
 
-pod 'UICollectionView-ARDynamicHeightLayoutCell', :git => "https://github.com/AugustRush/UICollectionView-ARDynamicHeightLayoutCell.git"
+pod 'UICollectionView-ARDynamicHeightLayoutCell', :git => 'https://github.com/AugustRush/UICollectionView-ARDynamicHeightLayoutCell.git'
