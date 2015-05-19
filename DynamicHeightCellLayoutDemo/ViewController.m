@@ -65,10 +65,6 @@
         [cell filleCellWithFeed:feed];
 
     }];
-//    return [collectionView ar_sizeForCellWithIdentifier:@"DynamicHeightCell" configuration:^(id cell) {
-//        FeedModel *feed = self.feeds[indexPath.row];
-//        [cell filleCellWithFeed:feed];
-//    }];
 }
 
 #pragma mark - dataSource
