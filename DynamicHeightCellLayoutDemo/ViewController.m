@@ -23,6 +23,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.title = @"DynamicHeightLayoutCell";
     // Do any additional setup after loading the view, typically from a nib.
     [self.collectionView registerNib:[UINib nibWithNibName:@"DynamicHeightCell" bundle:nil] forCellWithReuseIdentifier:@"DynamicHeightCell"];
     
@@ -41,7 +43,7 @@
                         [UIImage imageNamed:@"3.jpg"],
                         [UIImage imageNamed:@"Jiker.png"]];
     
-    for (int i = 0; i < 50; i++) {
+    for (int i = 0; i < 20; i++) {
         FeedModel *feed = [[FeedModel alloc] init];
         feed.title = titles[arc4random()%3];
         feed.content = contents[arc4random()%3];
