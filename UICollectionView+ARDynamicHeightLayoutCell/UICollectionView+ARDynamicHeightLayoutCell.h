@@ -25,7 +25,7 @@
 @interface UICollectionView (ARDynamicHeightLayoutCell)
 
 /**
- *  caculate cell size with mainScreen width
+ *  caculate cell size
  *
  *  @param identifier    cell's reuse identifier
  *  @param configuration fill cell with you feed data
@@ -35,7 +35,7 @@
 -(CGSize)ar_sizeForCellWithIdentifier:(NSString *)identifier configuration:(void(^)(id cell))configuration;
 
 /**
- *  caculate cell size with mainScreen width
+ *  caculate cell size with a fixed width
  *
  *  @param identifier    cell's reuse identifier
  *  @param fixedWidth    your expect width
@@ -47,7 +47,7 @@
 -(CGSize)ar_sizeForCellWithIdentifier:(NSString *)identifier fixedWidth:(CGFloat)fixedWidth configuration:(void (^)(id cell))configuration;
 
 /**
- *  caculate cell size with mainScreen width
+ *  caculate cell size with fixed height
  *
  *  @param identifier    cell's reuse identifier
  *  @param fixedWidth    your expect height

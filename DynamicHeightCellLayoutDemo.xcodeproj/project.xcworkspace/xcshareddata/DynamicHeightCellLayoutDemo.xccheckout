@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>D7717E17-C95A-47CB-912E-49DB02978026</string>
+	<key>IDESourceControlProjectName</key>
+	<string>DynamicHeightCellLayoutDemo</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>8A2741409A6ABF21EF09448E4DFCF5C51C945A41</key>
+		<string>https://github.com/AugustRush/UICollectionView-ARDynamicHeightLayoutCell.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>DynamicHeightCellLayoutDemo.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>8A2741409A6ABF21EF09448E4DFCF5C51C945A41</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/AugustRush/UICollectionView-ARDynamicHeightLayoutCell.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>8A2741409A6ABF21EF09448E4DFCF5C51C945A41</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>8A2741409A6ABF21EF09448E4DFCF5C51C945A41</string>
+			<key>IDESourceControlWCCName</key>
+			<string>DynamicHeightCellLayoutDemo</string>
+		</dict>
+	</array>
+</dict>
+</plist>

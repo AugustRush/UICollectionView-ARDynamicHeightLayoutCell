@@ -33,17 +33,7 @@
 {
     UICollectionViewCell *cell = [self templeCaculateCellWithIdentifier:identifier];
     configuration(cell);
-    NSLayoutConstraint *tempConstraint = [NSLayoutConstraint
-                                          constraintWithItem:cell.contentView
-                                          attribute:NSLayoutAttributeWidth
-                                          relatedBy:NSLayoutRelationEqual
-                                          toItem:nil
-                                          attribute:NSLayoutAttributeNotAnAttribute
-                                          multiplier:1
-                                          constant:kScreenWidth];
-    [cell.contentView addConstraint:tempConstraint];
     CGSize size  = [cell systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-    [cell.contentView removeConstraint:tempConstraint];
     return size;
 }
 
@@ -72,7 +62,7 @@
     configuration(cell);
     NSLayoutConstraint *tempConstraint = [NSLayoutConstraint
                                           constraintWithItem:cell.contentView
-                                          attribute:NSLayoutAttributeWidth
+                                          attribute:NSLayoutAttributeHeight
                                           relatedBy:NSLayoutRelationEqual
                                           toItem:nil
                                           attribute:NSLayoutAttributeNotAnAttribute
