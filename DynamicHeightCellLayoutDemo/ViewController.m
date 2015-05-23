@@ -13,9 +13,11 @@
 
 @interface ViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet UICollectionViewFlowLayout *flowLayout;
 
 @property (nonatomic, strong) NSMutableArray *feeds;
 - (IBAction)addFeed:(id)sender;
+- (IBAction)changeLayoutDirection:(id)sender;
 
 @end
 
@@ -51,6 +53,7 @@
         
         [self.feeds addObject:feed];
     }
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -62,11 +65,20 @@
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [collectionView ar_sizeForCellWithIdentifier:@"DynamicHeightCell" fixedWidth:300 configuration:^(id cell) {
-        FeedModel *feed = self.feeds[indexPath.row];
-        [cell filleCellWithFeed:feed];
+    if (self.flowLayout.scrollDirection == UICollectionViewScrollDirectionHorizontal) {
+        return [collectionView ar_sizeForCellWithIdentifier:@"DynamicHeightCell" fixedHeight:400
+                                              configuration:^(id cell) {
+                                                  FeedModel *feed = self.feeds[indexPath.row];
+                                                  [cell filleCellWithFeed:feed];
+                                              }];
+    }else{
+    
+        return [collectionView ar_sizeForCellWithIdentifier:@"DynamicHeightCell"    fixedWidth:300 configuration:^(id cell) {
+            FeedModel *feed = self.feeds[indexPath.row];
+            [cell filleCellWithFeed:feed];
 
-    }];
+        }];
+    }
 }
 
 #pragma mark - dataSource
@@ -88,7 +100,12 @@
     FeedModel *feed = [[FeedModel alloc] init];
     feed.title = @"Dynamic Cell";
     feed.content = @"This just use to test text, what are they funcking talking. let us to see your baby.";
-    feed.image = [UIImage imageNamed:@"Jiker"];
+    
+    NSArray *images = @[[UIImage imageNamed:@"1.jpg"],
+                        [UIImage imageNamed:@"2.jpg"],
+                        [UIImage imageNamed:@"3.jpg"],
+                        [UIImage imageNamed:@"Jiker.png"]];
+    feed.image = images[arc4random()%4];
     
     [self.feeds addObject:feed];
 
@@ -98,6 +115,12 @@
     } completion:^(BOOL finished) {
         [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
     }];
+}
+
+- (IBAction)changeLayoutDirection:(id)sender {
+    self.flowLayout.scrollDirection = !self.flowLayout.scrollDirection;
+    
+    [self.collectionView setCollectionViewLayout:self.flowLayout animated:YES];
 }
 
 @end

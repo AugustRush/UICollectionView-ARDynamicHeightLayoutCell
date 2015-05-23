@@ -52,6 +52,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="paI-sY-uvt">
+                        <barButtonItem key="leftBarButtonItem" title="direction" id="dXw-qp-vB4">
+                            <connections>
+                                <action selector="changeLayoutDirection:" destination="vXZ-lx-hvc" id="TvK-Wk-StV"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="add" id="5Vw-ev-h6U">
                             <connections>
                                 <action selector="addFeed:" destination="vXZ-lx-hvc" id="b1n-Uw-gLs"/>
@@ -60,6 +65,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="hWC-bd-kLg" id="pbm-G2-0Oo"/>
+                        <outlet property="flowLayout" destination="D0J-2m-puL" id="pus-ft-ZGt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
