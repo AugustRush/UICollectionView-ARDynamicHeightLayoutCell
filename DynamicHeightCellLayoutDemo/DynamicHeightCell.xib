@@ -22,7 +22,7 @@
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="128" placeholderIntrinsicHeight="107" translatesAutoresizingMaskIntoConstraints="NO" id="k6c-wy-vUp">
                         <rect key="frame" x="8" y="47" width="128" height="107"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="239" translatesAutoresizingMaskIntoConstraints="NO" id="s4y-E9-xAe">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="none" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="239" translatesAutoresizingMaskIntoConstraints="NO" id="s4y-E9-xAe">
                         <rect key="frame" x="8" y="170" width="239" height="22"/>
                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -49,7 +49,7 @@
                 <outlet property="imageView" destination="k6c-wy-vUp" id="A0V-qc-N1D"/>
                 <outlet property="textlabel" destination="ghO-QM-Kbc" id="JAB-2O-GdH"/>
             </connections>
-            <point key="canvasLocation" x="505.5" y="476"/>
+            <point key="canvasLocation" x="157.5" y="425"/>
         </collectionViewCell>
     </objects>
 </document>

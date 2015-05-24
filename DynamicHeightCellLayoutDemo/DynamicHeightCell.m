@@ -13,7 +13,9 @@
 - (void)awakeFromNib {
     // Initialization code
     self.contentView.backgroundColor = [UIColor whiteColor];
-    self.contentLabel.preferredMaxLayoutWidth = [[UIScreen mainScreen] bounds].size.width - 16;
+    
+    //You must set the mutile lines label's preferredMaxLayoutWidth correctly
+    self.contentLabel.preferredMaxLayoutWidth = [[UIScreen mainScreen] bounds].size.width - 36;
 }
 
 -(void)filleCellWithFeed:(FeedModel *)feed
