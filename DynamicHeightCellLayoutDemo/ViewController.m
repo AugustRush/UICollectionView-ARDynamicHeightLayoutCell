@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "DynamicHeightCell.h"
+#import "DynamicSizeCell.h"
 
 #import "UICollectionView+ARDynamicHeightLayoutCell.h"
 
@@ -29,6 +30,7 @@
     self.title = @"DynamicHeightLayoutCell";
     // Do any additional setup after loading the view, typically from a nib.
     [self.collectionView registerNib:[UINib nibWithNibName:@"DynamicHeightCell" bundle:nil] forCellWithReuseIdentifier:@"DynamicHeightCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"DynamicSizeCell" bundle:nil] forCellWithReuseIdentifier:@"DynamicSizeCell"];
     
     
     // demo data
@@ -65,18 +67,16 @@
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    FeedModel *feed = self.feeds[indexPath.row];
     if (self.flowLayout.scrollDirection == UICollectionViewScrollDirectionHorizontal) {
-        return [collectionView ar_sizeForCellWithIdentifier:@"DynamicHeightCell" fixedHeight:400
-                                              configuration:^(id cell) {
-                                                  FeedModel *feed = self.feeds[indexPath.row];
-                                                  [cell filleCellWithFeed:feed];
-                                              }];
+        return [collectionView ar_sizeForCellWithIdentifier:@"DynamicSizeCell" configuration:^(id cell) {
+            [cell filleCellWithFeed:feed];
+        }];
+                
     }else{
     
         return [collectionView ar_sizeForCellWithIdentifier:@"DynamicHeightCell"    fixedWidth:300 configuration:^(id cell) {
-            FeedModel *feed = self.feeds[indexPath.row];
             [cell filleCellWithFeed:feed];
-
         }];
     }
 }
@@ -90,10 +90,18 @@
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    DynamicHeightCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DynamicHeightCell" forIndexPath:indexPath];
-    FeedModel *feed = self.feeds[indexPath.row];
-    [cell filleCellWithFeed:feed];
-    return cell;
+    if (self.flowLayout.scrollDirection == UICollectionViewScrollDirectionHorizontal) {
+        DynamicSizeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DynamicSizeCell" forIndexPath:indexPath];
+        FeedModel *feed = self.feeds[indexPath.row];
+        [cell filleCellWithFeed:feed];
+        return cell;
+    }else{
+        DynamicHeightCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DynamicHeightCell" forIndexPath:indexPath];
+        FeedModel *feed = self.feeds[indexPath.row];
+        [cell filleCellWithFeed:feed];
+        return cell;
+    
+    }
 }
 
 - (IBAction)addFeed:(id)sender {
@@ -118,9 +126,14 @@
 }
 
 - (IBAction)changeLayoutDirection:(id)sender {
+    [self.flowLayout invalidateLayout];
     self.flowLayout.scrollDirection = !self.flowLayout.scrollDirection;
     
-    [self.collectionView setCollectionViewLayout:self.flowLayout animated:YES];
+    [self.collectionView performBatchUpdates:^{
+        [self.collectionView setCollectionViewLayout:self.flowLayout animated:YES];        
+    } completion:^(BOOL finished) {
+        
+    }];
 }
 
 @end

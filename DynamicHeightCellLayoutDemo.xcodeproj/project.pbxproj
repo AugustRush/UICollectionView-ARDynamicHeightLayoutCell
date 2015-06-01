@@ -18,6 +18,8 @@
 		97A65D361B0B103F008F0C99 /* FeedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A65D351B0B103F008F0C99 /* FeedModel.m */; };
 		97A65D3C1B0B214F008F0C99 /* DynamicHeightCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A65D3A1B0B214F008F0C99 /* DynamicHeightCell.m */; };
 		97A65D3D1B0B214F008F0C99 /* DynamicHeightCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97A65D3B1B0B214F008F0C99 /* DynamicHeightCell.xib */; };
+		97BCDED51B1B34CE00573AB7 /* DynamicSizeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97BCDED31B1B34CE00573AB7 /* DynamicSizeCell.m */; };
+		97BCDED61B1B34CE00573AB7 /* DynamicSizeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97BCDED41B1B34CE00573AB7 /* DynamicSizeCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,9 @@
 		97A65D391B0B214F008F0C99 /* DynamicHeightCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicHeightCell.h; sourceTree = "<group>"; };
 		97A65D3A1B0B214F008F0C99 /* DynamicHeightCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DynamicHeightCell.m; sourceTree = "<group>"; };
 		97A65D3B1B0B214F008F0C99 /* DynamicHeightCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DynamicHeightCell.xib; sourceTree = "<group>"; };
+		97BCDED21B1B34CE00573AB7 /* DynamicSizeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicSizeCell.h; sourceTree = "<group>"; };
+		97BCDED31B1B34CE00573AB7 /* DynamicSizeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DynamicSizeCell.m; sourceTree = "<group>"; };
+		97BCDED41B1B34CE00573AB7 /* DynamicSizeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DynamicSizeCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +105,9 @@
 				97A65D391B0B214F008F0C99 /* DynamicHeightCell.h */,
 				97A65D3A1B0B214F008F0C99 /* DynamicHeightCell.m */,
 				97A65D3B1B0B214F008F0C99 /* DynamicHeightCell.xib */,
+				97BCDED21B1B34CE00573AB7 /* DynamicSizeCell.h */,
+				97BCDED31B1B34CE00573AB7 /* DynamicSizeCell.m */,
+				97BCDED41B1B34CE00573AB7 /* DynamicSizeCell.xib */,
 				97A65D341B0B103F008F0C99 /* FeedModel.h */,
 				97A65D351B0B103F008F0C99 /* FeedModel.m */,
 				97A65D111B0B08B1008F0C99 /* Main.storyboard */,
@@ -226,6 +234,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				97A65D3D1B0B214F008F0C99 /* DynamicHeightCell.xib in Resources */,
+				97BCDED61B1B34CE00573AB7 /* DynamicSizeCell.xib in Resources */,
 				97A65D131B0B08B1008F0C99 /* Main.storyboard in Resources */,
 				97A65D181B0B08B1008F0C99 /* LaunchScreen.xib in Resources */,
 				97A65D151B0B08B1008F0C99 /* Images.xcassets in Resources */,
@@ -246,6 +255,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97BCDED51B1B34CE00573AB7 /* DynamicSizeCell.m in Sources */,
 				97A65D3C1B0B214F008F0C99 /* DynamicHeightCell.m in Sources */,
 				97A65D101B0B08B1008F0C99 /* ViewController.m in Sources */,
 				97A65D0D1B0B08B1008F0C99 /* AppDelegate.m in Sources */,
