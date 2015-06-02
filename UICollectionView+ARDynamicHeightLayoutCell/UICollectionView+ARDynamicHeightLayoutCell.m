@@ -110,4 +110,10 @@
     return [[self templeCells] objectForKey:identifier];
 }
 
+-(void)addStoryBoardPrototypeCell:(UICollectionViewCell *)prototypeCell withReuseIdentifier:(NSString *)reuseIdentifier
+{
+    NSMutableDictionary *templeCells = [self templeCells];
+    templeCells[reuseIdentifier] = prototypeCell;
+}
+
 @end

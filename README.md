@@ -56,8 +56,22 @@ if your cell use autolayout , all you need just to do like this:
 }
 ```
 
-if you using UITableView ,you should use 'https://github.com/forkingdog/UITableView-FDTemplateLayoutCell'.
-
 ## Install
 
 pod 'UICollectionView-ARDynamicHeightLayoutCell', :git => 'https://github.com/AugustRush/UICollectionView-ARDynamicHeightLayoutCell.git'
+
+
+## Release Versions
+
+* v0.5 support to caculate size for UICollectionView Cell
+
+* v0.6 fixed Height caculated bug and support Dynamic size cell
+
+* v0.7 add Support for StoryBoard
+
+## ToDo
+
+* add PreCache if needed
+
+* add more exmples
+

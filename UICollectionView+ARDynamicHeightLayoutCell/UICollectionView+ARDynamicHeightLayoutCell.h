@@ -58,4 +58,12 @@
 
 -(CGSize)ar_sizeForCellWithIdentifier:(NSString *)identifier fixedHeight:(CGFloat)fixedHeight configuration:(void (^)(id cell))configuration;
 
+/**
+ *   UICollectionView is not same as UITableView ,it can not get storyBoard prototype cell via Runtime , so add this methods for Storyboard
+ *
+ *  @param prototypeCell   storyBoard prototype cell
+ *  @param reuseIdentifier prototype cell's reuseIdentifier
+ */
+-(void)addStoryBoardPrototypeCell:(UICollectionViewCell *)prototypeCell withReuseIdentifier:(NSString *)reuseIdentifier;
+
 @end
