@@ -5,7 +5,6 @@
 ## Demo gif 
 
 <img src="https://github.com/AugustRush/UICollectionView-ARDynamicHeightLayoutCell/blob/master/gif1.gif" width="320">
-<img src="https://github.com/AugustRush/UICollectionView-ARDynamicHeightLayoutCell/blob/master/gif2.gif" width="320">
 
 ## Usage
 

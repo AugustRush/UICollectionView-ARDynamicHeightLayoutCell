@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UICollectionViewFlowLayout *flowLayout;
 
+@property (nonatomic, assign) BOOL onlyImage;
+
 @property (nonatomic, strong) NSMutableArray *feeds;
 - (IBAction)addFeed:(id)sender;
 - (IBAction)changeLayoutDirection:(id)sender;
@@ -68,7 +70,7 @@
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     FeedModel *feed = self.feeds[indexPath.row];
-    if (self.flowLayout.scrollDirection == UICollectionViewScrollDirectionHorizontal) {
+    if (self.onlyImage) {
         return [collectionView ar_sizeForCellWithIdentifier:@"DynamicSizeCell" configuration:^(id cell) {
             [cell filleCellWithFeed:feed];
         }];
@@ -90,7 +92,7 @@
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.flowLayout.scrollDirection == UICollectionViewScrollDirectionHorizontal) {
+    if (self.onlyImage) {
         DynamicSizeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DynamicSizeCell" forIndexPath:indexPath];
         FeedModel *feed = self.feeds[indexPath.row];
         [cell filleCellWithFeed:feed];
@@ -127,13 +129,9 @@
 
 - (IBAction)changeLayoutDirection:(id)sender {
     [self.flowLayout invalidateLayout];
-    self.flowLayout.scrollDirection = !self.flowLayout.scrollDirection;
-    
-    [self.collectionView performBatchUpdates:^{
-        [self.collectionView setCollectionViewLayout:self.flowLayout animated:YES];        
-    } completion:^(BOOL finished) {
-        
-    }];
+    self.onlyImage = !self.onlyImage;
+    [self.collectionView reloadData];
+
 }
 
 @end
