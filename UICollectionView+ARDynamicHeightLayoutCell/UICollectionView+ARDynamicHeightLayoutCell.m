@@ -107,7 +107,16 @@
 
 -(id)templeCaculateCellWithIdentifier:(NSString *)identifier
 {
-    return [[self templeCells] objectForKey:identifier];
+    NSMutableDictionary *templeCells = [self templeCells];
+    id cell = [templeCells objectForKey:identifier];
+    if (cell == nil) {
+        NSDictionary *cellNibDict = [self valueForKey:@"_cellNibDict"];
+        UINib *cellNIb = cellNibDict[identifier];
+        cell = [[cellNIb instantiateWithOwner:nil options:nil] lastObject];
+        templeCells[identifier] = cell;
+    }
+    
+    return cell;
 }
 
 -(void)addStoryBoardPrototypeCell:(UICollectionViewCell *)prototypeCell withReuseIdentifier:(NSString *)reuseIdentifier
