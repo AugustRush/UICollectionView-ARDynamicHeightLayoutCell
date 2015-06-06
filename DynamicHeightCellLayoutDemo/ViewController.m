@@ -10,7 +10,7 @@
 #import "DynamicHeightCell.h"
 #import "DynamicSizeCell.h"
 
-#import "UICollectionView+ARDynamicHeightLayoutCell.h"
+#import "UICollectionView+ARDynamicCacheHeightLayoutCell.h"
 
 @interface ViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -71,13 +71,17 @@
 {
     FeedModel *feed = self.feeds[indexPath.row];
     if (self.onlyImage) {
-        return [collectionView ar_sizeForCellWithIdentifier:@"DynamicSizeCell" configuration:^(id cell) {
+        return [collectionView ar_sizeForCellWithIdentifier:@"DynamicSizeCell"
+                                                  indexPath:indexPath
+                                              configuration:^(id cell) {
             [cell filleCellWithFeed:feed];
         }];
                 
     }else{
     
-        return [collectionView ar_sizeForCellWithIdentifier:@"DynamicHeightCell"    fixedWidth:300 configuration:^(id cell) {
+        return [collectionView ar_sizeForCellWithIdentifier:@"DynamicHeightCell"
+                                                  indexPath:indexPath
+                                                 fixedWidth:300 configuration:^(id cell) {
             [cell filleCellWithFeed:feed];
         }];
     }

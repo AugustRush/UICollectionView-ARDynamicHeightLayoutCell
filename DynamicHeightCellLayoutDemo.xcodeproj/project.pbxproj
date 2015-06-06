@@ -15,7 +15,6 @@
 		97A65D151B0B08B1008F0C99 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97A65D141B0B08B1008F0C99 /* Images.xcassets */; };
 		97A65D181B0B08B1008F0C99 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97A65D161B0B08B1008F0C99 /* LaunchScreen.xib */; };
 		97A65D241B0B08B1008F0C99 /* DynamicHeightCellLayoutDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A65D231B0B08B1008F0C99 /* DynamicHeightCellLayoutDemoTests.m */; };
-		97A65D301B0B0947008F0C99 /* UICollectionView+ARDynamicHeightLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A65D2F1B0B0947008F0C99 /* UICollectionView+ARDynamicHeightLayoutCell.m */; };
 		97A65D361B0B103F008F0C99 /* FeedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A65D351B0B103F008F0C99 /* FeedModel.m */; };
 		97A65D3C1B0B214F008F0C99 /* DynamicHeightCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A65D3A1B0B214F008F0C99 /* DynamicHeightCell.m */; };
 		97A65D3D1B0B214F008F0C99 /* DynamicHeightCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97A65D3B1B0B214F008F0C99 /* DynamicHeightCell.xib */; };
@@ -49,8 +48,6 @@
 		97A65D1D1B0B08B1008F0C99 /* DynamicHeightCellLayoutDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DynamicHeightCellLayoutDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		97A65D221B0B08B1008F0C99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		97A65D231B0B08B1008F0C99 /* DynamicHeightCellLayoutDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DynamicHeightCellLayoutDemoTests.m; sourceTree = "<group>"; };
-		97A65D2E1B0B0947008F0C99 /* UICollectionView+ARDynamicHeightLayoutCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionView+ARDynamicHeightLayoutCell.h"; sourceTree = "<group>"; };
-		97A65D2F1B0B0947008F0C99 /* UICollectionView+ARDynamicHeightLayoutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UICollectionView+ARDynamicHeightLayoutCell.m"; sourceTree = "<group>"; };
 		97A65D341B0B103F008F0C99 /* FeedModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedModel.h; sourceTree = "<group>"; };
 		97A65D351B0B103F008F0C99 /* FeedModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedModel.m; sourceTree = "<group>"; };
 		97A65D391B0B214F008F0C99 /* DynamicHeightCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicHeightCell.h; sourceTree = "<group>"; };
@@ -160,8 +157,6 @@
 			children = (
 				9791043F1B2290790090FE6D /* UICollectionView+ARDynamicCacheHeightLayoutCell.h */,
 				979104401B2290790090FE6D /* UICollectionView+ARDynamicCacheHeightLayoutCell.m */,
-				97A65D2E1B0B0947008F0C99 /* UICollectionView+ARDynamicHeightLayoutCell.h */,
-				97A65D2F1B0B0947008F0C99 /* UICollectionView+ARDynamicHeightLayoutCell.m */,
 			);
 			path = "UICollectionView+ARDynamicHeightLayoutCell";
 			sourceTree = SOURCE_ROOT;
@@ -272,7 +267,6 @@
 				97A65D3C1B0B214F008F0C99 /* DynamicHeightCell.m in Sources */,
 				97A65D101B0B08B1008F0C99 /* ViewController.m in Sources */,
 				97A65D0D1B0B08B1008F0C99 /* AppDelegate.m in Sources */,
-				97A65D301B0B0947008F0C99 /* UICollectionView+ARDynamicHeightLayoutCell.m in Sources */,
 				97A65D361B0B103F008F0C99 /* FeedModel.m in Sources */,
 				97A65D0A1B0B08B1008F0C99 /* main.m in Sources */,
 				979104411B2290790090FE6D /* UICollectionView+ARDynamicCacheHeightLayoutCell.m in Sources */,
