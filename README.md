@@ -63,21 +63,23 @@ pod 'UICollectionView-ARDynamicHeightLayoutCell', :git => 'https://github.com/Au
 
 ## Release Versions
 
-* v0.5 
+##### v1.0
 
-    support to caculate size for UICollectionView Cell
+* add cache for cell size height, improve efficiency（automatic invalidate）
 
-* v0.6
+* v0.6 
 
-    fixed Height caculated bug and support Dynamic size cell
+   fixed Height caculated bug and support Dynamic size cell
 
 * v0.7 
 
     add Support for StoryBoard
 
+* v0.5 
+
+    support to caculate size for UICollectionView Cell
+
 ## ToDo
 
-* add PreCache if needed
-
-* add more exmples
+* pre caculate cache
 
