@@ -1,6 +1,8 @@
 # UICollectionView+ARDynamicHeightLayoutCell
 
-* An simple category for caculating autolayout UICollectionViewCell size.
+* An simple category for caculating autolayout UICollectionViewCell size. Automatic manage cell's size cache, automatic invalidate,
+
+most improve efficiency.
 
 ## Demo gif 
 
@@ -63,9 +65,9 @@ pod 'UICollectionView-ARDynamicHeightLayoutCell', :git => 'https://github.com/Au
 
 ## Release Versions
 
-##### v1.0
+#### v1.0
 
-* add cache for cell size height, improve efficiency（automatic invalidate）
+##### add cache for cell size height, improve efficiency（automatic invalidate）
 
 * v0.6 
 
