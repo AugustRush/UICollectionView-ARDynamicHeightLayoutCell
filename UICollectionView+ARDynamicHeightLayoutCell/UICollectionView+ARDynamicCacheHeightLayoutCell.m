@@ -15,6 +15,8 @@ typedef NS_ENUM(NSUInteger, ARDynamicSizeCaculateType) {
     ARDynamicSizeCaculateTypeWidth
 };
 
+#define ARLayoutCellInvalidateValue [NSValue valueWithCGSize:CGSizeZero]
+
 @implementation UICollectionView (ARDynamicCacheHeightLayoutCell)
 
 +(void)initialize
@@ -24,12 +26,10 @@ typedef NS_ENUM(NSUInteger, ARDynamicSizeCaculateType) {
     @selector(registerClass:forCellWithReuseIdentifier:),
     @selector(reloadData),
     @selector(reloadSections:),
-    @selector(insertSections:),
     @selector(deleteSections:),
     @selector(moveSection:toSection:),
     @selector(reloadItemsAtIndexPaths:),
     @selector(deleteItemsAtIndexPaths:),
-    @selector(insertItemsAtIndexPaths:),
     @selector(moveItemAtIndexPath:toIndexPath:)};
     
     for (int i = 0; i < sizeof(selectors)/sizeof(SEL); i++) {
@@ -64,8 +64,12 @@ typedef NS_ENUM(NSUInteger, ARDynamicSizeCaculateType) {
                          caculateType:(ARDynamicSizeCaculateType)caculateType
                         configuration:(void (^)(id))configuration
 {
+    BOOL hasCache = NO;
     if ([self hasCacheAtIndexPath:indexPath]) {
-        return [self sizeCacheAtIndexPath:indexPath];
+        hasCache = YES;
+        if (![[self sizeCacheAtIndexPath:indexPath] isEqualToValue:ARLayoutCellInvalidateValue]) {
+            return [[self sizeCacheAtIndexPath:indexPath] CGSizeValue];
+        }
     }
     
     //has no size chche
@@ -90,7 +94,12 @@ typedef NS_ENUM(NSUInteger, ARDynamicSizeCaculateType) {
     }
     
     NSMutableArray *sectionCache = [self sizeCache][indexPath.section];
-    [sectionCache addObject:[NSValue valueWithCGSize:size]];
+    NSValue *sizeValue = [NSValue valueWithCGSize:size];
+    if (hasCache) {
+        [sectionCache replaceObjectAtIndex:indexPath.row withObject:sizeValue];
+    }else{
+        [sectionCache insertObject:sizeValue atIndex:indexPath.row];
+    }
     return size;
 }
 
@@ -117,44 +126,64 @@ typedef NS_ENUM(NSUInteger, ARDynamicSizeCaculateType) {
 
 -(void)ar_reloadSections:(NSIndexSet *)sections
 {
+    [sections enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
+        [[self sizeCache] replaceObjectAtIndex:idx withObject:@[].mutableCopy];
+    }];
     [self ar_reloadSections:sections];
-}
-
--(void)ar_insertSections:(NSIndexSet *)sections
-{
-    [self ar_insertSections:sections];
 }
 
 -(void)ar_deleteSections:(NSIndexSet *)sections
 {
+    [sections enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
+        [[self sizeCache] removeObjectAtIndex:idx];
+    }];
     [self ar_deleteSections:sections];
 }
 
 -(void)ar_moveSection:(NSInteger)section toSection:(NSInteger)newSection
 {
+    [[self sizeCache] exchangeObjectAtIndex:section withObjectAtIndex:newSection];
     [self ar_moveSection:section toSection:newSection];
 }
 
 #pragma mark - item changes
 
--(void)ar_insertItemsAtIndexPaths:(NSArray *)indexPaths
-{
-    [self ar_insertItemsAtIndexPaths:indexPaths];
-}
-
 -(void)ar_deleteItemsAtIndexPaths:(NSArray *)indexPaths
 {
+    [indexPaths enumerateObjectsUsingBlock:^(NSIndexPath *obj, NSUInteger idx, BOOL *stop) {
+        NSMutableArray *section = [self sizeCache][obj.section];
+        [section removeObjectAtIndex:obj.row];
+    }];
     [self ar_deleteItemsAtIndexPaths:indexPaths];
 }
 
 -(void)ar_reloadItemsAtIndexPaths:(NSArray *)indexPaths
 {
+    [indexPaths enumerateObjectsUsingBlock:^(NSIndexPath *obj, NSUInteger idx, BOOL *stop) {
+        NSMutableArray *section = [self sizeCache][obj.section];
+        section[obj.row] = ARLayoutCellInvalidateValue;
+    }];
     [self ar_reloadItemsAtIndexPaths:indexPaths];
 }
 
 -(void)ar_moveItemAtIndexPath:(NSIndexPath *)indexPath toIndexPath:(NSIndexPath *)newIndexPath
 {
+    if ([self hasCacheAtIndexPath:indexPath] && [self hasCacheAtIndexPath:newIndexPath]) {
+        NSValue *indexPathSizeValue = [self sizeCacheAtIndexPath:indexPath];
+        NSValue *newIndexPathSizeValue = [self sizeCacheAtIndexPath:newIndexPath];
+        
+        NSMutableArray *section1 = [self sizeCache][indexPath.section];
+        NSMutableArray *section2 = [self sizeCache][newIndexPath.section];
+        [section1 replaceObjectAtIndex:indexPath.row withObject:newIndexPathSizeValue];
+        [section2 replaceObjectAtIndex:newIndexPath.row withObject:indexPathSizeValue];
+    }
     [self ar_moveItemAtIndexPath:indexPath toIndexPath:newIndexPath];
+}
+
+-(void)ar_reloadData
+{
+    [[self sizeCache] removeAllObjects];
+    [self ar_reloadData];
 }
 
 #pragma mark - private methods
@@ -209,10 +238,10 @@ typedef NS_ENUM(NSUInteger, ARDynamicSizeCaculateType) {
     return hasCache;
 }
 
--(CGSize)sizeCacheAtIndexPath:(NSIndexPath *)indexPath
+-(NSValue *)sizeCacheAtIndexPath:(NSIndexPath *)indexPath
 {
     NSValue *sizeValue = [self sizeCache][indexPath.section][indexPath.row];
-    return [sizeValue CGSizeValue];
+    return sizeValue;
 }
 
 @end

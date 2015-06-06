@@ -105,10 +105,25 @@
         DynamicHeightCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DynamicHeightCell" forIndexPath:indexPath];
         FeedModel *feed = self.feeds[indexPath.row];
         [cell filleCellWithFeed:feed];
+        
         return cell;
     
     }
 }
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    
+    [collectionView performBatchUpdates:^{
+        [self.feeds exchangeObjectAtIndex:indexPath.row withObjectAtIndex:0];
+        [collectionView moveItemAtIndexPath:indexPath toIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
+#pragma mark - change cell type
 
 - (IBAction)addFeed:(id)sender {
     FeedModel *feed = [[FeedModel alloc] init];
