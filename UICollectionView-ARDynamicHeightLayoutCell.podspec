@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "UICollectionView-ARDynamicHeightLayoutCell"
-  s.version      = "0.75"
+  s.version      = "1.0"
   s.summary      = "Automatically UICollectionViewCell size calculating."
 
   s.description  = <<-DESC
@@ -78,7 +78,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/AugustRush/UICollectionView-ARDynamicHeightLayoutCell.git", :tag => "0.75" }
+  s.source       = { :git => "https://github.com/AugustRush/UICollectionView-ARDynamicHeightLayoutCell.git", :tag => "1.0" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #

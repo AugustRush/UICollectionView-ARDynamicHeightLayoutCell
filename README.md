@@ -5,6 +5,15 @@
 ## Demo gif 
 
 <img src="https://github.com/AugustRush/UICollectionView-ARDynamicHeightLayoutCell/blob/master/gif1.gif" width="320">
+<img src="https://github.com/AugustRush/UICollectionView-ARDynamicHeightLayoutCell/blob/master/gif2.gif" width="320">
+
+## Support
+
+* A prototype cell in storyboard
+
+* -registerNib:forCellReuseIdentifier:
+
+* -registerClass:forCellReuseIdentifier:
 
 ## Usage
 
@@ -63,17 +72,17 @@ pod 'UICollectionView-ARDynamicHeightLayoutCell', :git => 'https://github.com/Au
 
 ## Release Versions
 
-#### v1.0
+* v1.0
 
-##### add cache for cell size height, improve efficiency（automatic invalidate）
+   add cache for cell size height, improve efficiency（automatic invalidate）
+
+* v0.7 
+
+    add Support for StoryBoard prototype cell
 
 * v0.6 
 
    fixed Height caculated bug and support Dynamic size cell
-
-* v0.7 
-
-    add Support for StoryBoard
 
 * v0.5 
 
