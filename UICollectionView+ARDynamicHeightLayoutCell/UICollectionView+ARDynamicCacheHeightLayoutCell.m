@@ -199,8 +199,14 @@ typedef NS_ENUM(NSUInteger, ARDynamicSizeCaculateType) {
 {
     BOOL hasCache = NO;
     if ([self sizeCache].count > indexPath.section) {
-        if ([[self sizeCache][indexPath.section] count] > indexPath.row) {
+        NSMutableArray *section = [self sizeCache][indexPath.section];
+        if (section.count > indexPath.row) {
             hasCache = YES;
+        }
+        else {
+            for (unsigned int index = 0; index < indexPath.row - section.count + 1; index++) {
+                [section addObject:[NSValue valueWithCGSize:CGSizeZero]];
+            }
         }
     }else{
         [[self sizeCache] addObject:@[].mutableCopy];
