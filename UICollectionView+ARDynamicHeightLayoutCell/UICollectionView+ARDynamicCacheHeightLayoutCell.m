@@ -19,8 +19,7 @@ typedef NS_ENUM(NSUInteger, ARDynamicSizeCaculateType) {
 
 @implementation UICollectionView (ARDynamicCacheHeightLayoutCell)
 
-+(void)initialize
-{
++ (void)load {
     SEL selectors[] =
     {@selector(registerNib:forCellWithReuseIdentifier:),
     @selector(registerClass:forCellWithReuseIdentifier:),
@@ -43,30 +42,25 @@ typedef NS_ENUM(NSUInteger, ARDynamicSizeCaculateType) {
     }
 }
 
--(CGSize)ar_sizeForCellWithIdentifier:(NSString *)identifier indexPath:(NSIndexPath *)indexPath configuration:(void (^)(id))configuration
-{
+- (CGSize)ar_sizeForCellWithIdentifier:(NSString *)identifier indexPath:(NSIndexPath *)indexPath configuration:(void (^)(id))configuration {
     return [self ar_sizeForCellWithIdentifier:identifier indexPath:indexPath fixedValue:0 caculateType:ARDynamicSizeCaculateTypeSize configuration:configuration];
 }
 
--(CGSize)ar_sizeForCellWithIdentifier:(NSString *)identifier indexPath:(NSIndexPath *)indexPath fixedWidth:(CGFloat)fixedWidth configuration:(void (^)(id))configuration
-{
+- (CGSize)ar_sizeForCellWithIdentifier:(NSString *)identifier indexPath:(NSIndexPath *)indexPath fixedWidth:(CGFloat)fixedWidth configuration:(void (^)(id))configuration {
     return [self ar_sizeForCellWithIdentifier:identifier indexPath:indexPath fixedValue:fixedWidth caculateType:ARDynamicSizeCaculateTypeWidth configuration:configuration];
 }
 
--(CGSize)ar_sizeForCellWithIdentifier:(NSString *)identifier indexPath:(NSIndexPath *)indexPath fixedHeight:(CGFloat)fixedHeight configuration:(void (^)(id))configuration
-{
+- (CGSize)ar_sizeForCellWithIdentifier:(NSString *)identifier indexPath:(NSIndexPath *)indexPath fixedHeight:(CGFloat)fixedHeight configuration:(void (^)(id))configuration {
     return [self ar_sizeForCellWithIdentifier:identifier indexPath:indexPath fixedValue:fixedHeight caculateType:ARDynamicSizeCaculateTypeHeight configuration:configuration];
 }
 
--(CGSize)ar_sizeForCellWithIdentifier:(NSString *)identifier
+- (CGSize)ar_sizeForCellWithIdentifier:(NSString *)identifier
                             indexPath:(NSIndexPath *)indexPath
                            fixedValue:(CGFloat)fixedValue
                          caculateType:(ARDynamicSizeCaculateType)caculateType
-                        configuration:(void (^)(id))configuration
-{
-    BOOL hasCache = NO;
-    if ([self hasCacheAtIndexPath:indexPath]) {
-        hasCache = YES;
+                        configuration:(void (^)(id))configuration {
+    BOOL hasCache = [self hasCacheAtIndexPath:indexPath];
+    if (hasCache) {
         if (![[self sizeCacheAtIndexPath:indexPath] isEqualToValue:ARLayoutCellInvalidateValue]) {
             return [[self sizeCacheAtIndexPath:indexPath] CGSizeValue];
         }
@@ -105,8 +99,7 @@ typedef NS_ENUM(NSUInteger, ARDynamicSizeCaculateType) {
 
 #pragma mark - swizzled methods
 
--(void)ar_registerClass:(Class)cellClass forCellWithReuseIdentifier:(NSString *)identifier
-{
+- (void)ar_registerClass:(Class)cellClass forCellWithReuseIdentifier:(NSString *)identifier {
     [self ar_registerClass:cellClass forCellWithReuseIdentifier:identifier];
     
     id cell = [[cellClass alloc] initWithFrame:CGRectZero];
@@ -114,8 +107,7 @@ typedef NS_ENUM(NSUInteger, ARDynamicSizeCaculateType) {
     templeCells[identifier] = cell;
 }
 
--(void)ar_registerNib:(UINib *)nib forCellWithReuseIdentifier:(NSString *)identifier
-{
+- (void)ar_registerNib:(UINib *)nib forCellWithReuseIdentifier:(NSString *)identifier{
     [self ar_registerNib:nib forCellWithReuseIdentifier:identifier];
     id cell = [[nib instantiateWithOwner:nil options:nil] lastObject];
     NSMutableDictionary *templeCells = [self templeCells];
@@ -124,24 +116,21 @@ typedef NS_ENUM(NSUInteger, ARDynamicSizeCaculateType) {
 
 #pragma mark - section changes
 
--(void)ar_reloadSections:(NSIndexSet *)sections
-{
+- (void)ar_reloadSections:(NSIndexSet *)sections {
     [sections enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
         [[self sizeCache] replaceObjectAtIndex:idx withObject:@[].mutableCopy];
     }];
     [self ar_reloadSections:sections];
 }
 
--(void)ar_deleteSections:(NSIndexSet *)sections
-{
+- (void)ar_deleteSections:(NSIndexSet *)sections {
     [sections enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
         [[self sizeCache] removeObjectAtIndex:idx];
     }];
     [self ar_deleteSections:sections];
 }
 
--(void)ar_moveSection:(NSInteger)section toSection:(NSInteger)newSection
-{
+- (void)ar_moveSection:(NSInteger)section toSection:(NSInteger)newSection {
     [[self sizeCache] exchangeObjectAtIndex:section withObjectAtIndex:newSection];
     [self ar_moveSection:section toSection:newSection];
 }
@@ -157,8 +146,7 @@ typedef NS_ENUM(NSUInteger, ARDynamicSizeCaculateType) {
     [self ar_deleteItemsAtIndexPaths:indexPaths];
 }
 
--(void)ar_reloadItemsAtIndexPaths:(NSArray *)indexPaths
-{
+- (void)ar_reloadItemsAtIndexPaths:(NSArray *)indexPaths {
     [indexPaths enumerateObjectsUsingBlock:^(NSIndexPath *obj, NSUInteger idx, BOOL *stop) {
         NSMutableArray *section = [self sizeCache][obj.section];
         section[obj.row] = ARLayoutCellInvalidateValue;
@@ -166,8 +154,7 @@ typedef NS_ENUM(NSUInteger, ARDynamicSizeCaculateType) {
     [self ar_reloadItemsAtIndexPaths:indexPaths];
 }
 
--(void)ar_moveItemAtIndexPath:(NSIndexPath *)indexPath toIndexPath:(NSIndexPath *)newIndexPath
-{
+- (void)ar_moveItemAtIndexPath:(NSIndexPath *)indexPath toIndexPath:(NSIndexPath *)newIndexPath {
     if ([self hasCacheAtIndexPath:indexPath] && [self hasCacheAtIndexPath:newIndexPath]) {
         NSValue *indexPathSizeValue = [self sizeCacheAtIndexPath:indexPath];
         NSValue *newIndexPathSizeValue = [self sizeCacheAtIndexPath:newIndexPath];
@@ -180,16 +167,14 @@ typedef NS_ENUM(NSUInteger, ARDynamicSizeCaculateType) {
     [self ar_moveItemAtIndexPath:indexPath toIndexPath:newIndexPath];
 }
 
--(void)ar_reloadData
-{
+- (void)ar_reloadData {
     [[self sizeCache] removeAllObjects];
     [self ar_reloadData];
 }
 
 #pragma mark - private methods
 
--(NSMutableDictionary *)templeCells
-{
+- (NSMutableDictionary *)templeCells {
     NSMutableDictionary *templeCells = objc_getAssociatedObject(self, _cmd);
     if (templeCells == nil) {
         templeCells = @{}.mutableCopy;
@@ -198,8 +183,7 @@ typedef NS_ENUM(NSUInteger, ARDynamicSizeCaculateType) {
     return templeCells;
 }
 
--(id)templeCaculateCellWithIdentifier:(NSString *)identifier
-{
+- (id)templeCaculateCellWithIdentifier:(NSString *)identifier {
     NSMutableDictionary *templeCells = [self templeCells];
     id cell = [templeCells objectForKey:identifier];
     if (cell == nil) {
@@ -214,8 +198,7 @@ typedef NS_ENUM(NSUInteger, ARDynamicSizeCaculateType) {
 
 #pragma mark - cache methods
 
--(NSMutableArray *)sizeCache
-{
+- (NSMutableArray *)sizeCache {
     NSMutableArray *cache = objc_getAssociatedObject(self, _cmd);
     if (cache == nil) {
         cache = @[].mutableCopy;
@@ -224,8 +207,7 @@ typedef NS_ENUM(NSUInteger, ARDynamicSizeCaculateType) {
     return cache;
 }
 
--(BOOL)hasCacheAtIndexPath:(NSIndexPath *)indexPath
-{
+- (BOOL)hasCacheAtIndexPath:(NSIndexPath *)indexPath {
     BOOL hasCache = NO;
     if ([self sizeCache].count > indexPath.section) {
         if ([[self sizeCache][indexPath.section] count] > indexPath.row) {
@@ -238,8 +220,7 @@ typedef NS_ENUM(NSUInteger, ARDynamicSizeCaculateType) {
     return hasCache;
 }
 
--(NSValue *)sizeCacheAtIndexPath:(NSIndexPath *)indexPath
-{
+- (NSValue *)sizeCacheAtIndexPath:(NSIndexPath *)indexPath {
     NSValue *sizeValue = [self sizeCache][indexPath.section][indexPath.row];
     return sizeValue;
 }
