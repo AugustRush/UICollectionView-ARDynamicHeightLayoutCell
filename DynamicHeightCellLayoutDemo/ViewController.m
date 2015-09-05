@@ -48,7 +48,7 @@
                         [UIImage imageNamed:@"2.jpg"],
                         [UIImage imageNamed:@"3.jpg"],
                         [UIImage imageNamed:@"Jiker.png"]];
-    
+    //add temple data
     for (int i = 0; i < 20; i++) {
         FeedModel *feed = [[FeedModel alloc] init];
         feed.title = titles[arc4random()%3];
@@ -78,10 +78,11 @@
         }];
                 
     }else{
-    
+        //get screen width & minus 20 points
+        CGFloat width = [[UIScreen mainScreen] bounds].size.width - 20;
         return [collectionView ar_sizeForCellWithIdentifier:@"DynamicHeightCell"
                                                   indexPath:indexPath
-                                                 fixedWidth:300 configuration:^(id cell) {
+                                                 fixedWidth:width configuration:^(id cell) {
             [cell filleCellWithFeed:feed];
         }];
     }
