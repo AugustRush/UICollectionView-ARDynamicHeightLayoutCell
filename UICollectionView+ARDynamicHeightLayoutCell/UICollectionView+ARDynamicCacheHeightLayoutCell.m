@@ -148,8 +148,10 @@ typedef NS_ENUM(NSUInteger, ARDynamicSizeCaculateType) {
 
 - (void)ar_reloadItemsAtIndexPaths:(NSArray *)indexPaths {
     [indexPaths enumerateObjectsUsingBlock:^(NSIndexPath *obj, NSUInteger idx, BOOL *stop) {
-        NSMutableArray *section = [self sizeCache][obj.section];
-        section[obj.row] = ARLayoutCellInvalidateValue;
+        if ([self.sizeCache count] > obj.section) {
+            NSMutableArray *section = [self sizeCache][obj.section];
+            section[obj.row] = ARLayoutCellInvalidateValue;
+        }
     }];
     [self ar_reloadItemsAtIndexPaths:indexPaths];
 }
