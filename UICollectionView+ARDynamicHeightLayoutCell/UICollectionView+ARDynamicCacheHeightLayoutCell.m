@@ -19,7 +19,7 @@ typedef NS_ENUM(NSUInteger, ARDynamicSizeCaculateType) {
 
 @implementation UICollectionView (ARDynamicCacheHeightLayoutCell)
 
-+ (void)load {
++ (void)initialize {
     SEL selectors[] =
     {@selector(registerNib:forCellWithReuseIdentifier:),
     @selector(registerClass:forCellWithReuseIdentifier:),
@@ -58,7 +58,7 @@ typedef NS_ENUM(NSUInteger, ARDynamicSizeCaculateType) {
                             indexPath:(NSIndexPath *)indexPath
                            fixedValue:(CGFloat)fixedValue
                          caculateType:(ARDynamicSizeCaculateType)caculateType
-                        configuration:(void (^)(id))configuration {
+                        configuration:(void (^)(__kindof UICollectionViewCell *))configuration {
     BOOL hasCache = [self hasCacheAtIndexPath:indexPath];
     if (hasCache) {
         if (![[self sizeCacheAtIndexPath:indexPath] isEqualToValue:ARLayoutCellInvalidateValue]) {

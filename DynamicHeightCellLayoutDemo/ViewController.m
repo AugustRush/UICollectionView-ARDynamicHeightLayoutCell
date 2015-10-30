@@ -73,7 +73,7 @@
     if (self.onlyImage) {
         return [collectionView ar_sizeForCellWithIdentifier:@"DynamicSizeCell"
                                                   indexPath:indexPath
-                                              configuration:^(id cell) {
+                                              configuration:^(__kindof UICollectionViewCell * cell) {
             [cell filleCellWithFeed:feed];
         }];
                 
