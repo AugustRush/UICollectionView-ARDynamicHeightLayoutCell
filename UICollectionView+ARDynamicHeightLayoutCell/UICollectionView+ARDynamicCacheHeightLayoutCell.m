@@ -86,7 +86,7 @@ typedef NS_ENUM(NSUInteger, ARDynamicSizeCaculateType) {
     }else{
         size  = [cell systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
     }
-    
+
     NSMutableArray *sectionCache = [self sizeCache][indexPath.section];
     NSValue *sizeValue = [NSValue valueWithCGSize:size];
     if (hasCache) {
@@ -211,12 +211,16 @@ typedef NS_ENUM(NSUInteger, ARDynamicSizeCaculateType) {
 
 - (BOOL)hasCacheAtIndexPath:(NSIndexPath *)indexPath {
     BOOL hasCache = NO;
-    if ([self sizeCache].count > indexPath.section) {
-        if ([[self sizeCache][indexPath.section] count] > indexPath.row) {
+    NSMutableArray *cacheArray = [self sizeCache];
+    if (cacheArray.count > indexPath.section) {
+        if ([cacheArray[indexPath.section] count] > indexPath.row) {
             hasCache = YES;
         }
     }else{
-        [[self sizeCache] addObject:@[].mutableCopy];
+        NSUInteger index = cacheArray.count;
+        for (; index < indexPath.section + 1; index++) {
+            [cacheArray addObject:@[].mutableCopy];
+        }
     }
     
     return hasCache;
