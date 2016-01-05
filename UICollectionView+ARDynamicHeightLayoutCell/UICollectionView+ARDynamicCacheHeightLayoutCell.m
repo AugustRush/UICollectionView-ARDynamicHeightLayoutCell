@@ -19,27 +19,27 @@ typedef NS_ENUM(NSUInteger, ARDynamicSizeCaculateType) {
 
 @implementation UICollectionView (ARDynamicCacheHeightLayoutCell)
 
-+ (void)initialize {
-    SEL selectors[] =
-    {@selector(registerNib:forCellWithReuseIdentifier:),
-    @selector(registerClass:forCellWithReuseIdentifier:),
-    @selector(reloadData),
-    @selector(reloadSections:),
-    @selector(deleteSections:),
-    @selector(moveSection:toSection:),
-    @selector(reloadItemsAtIndexPaths:),
-    @selector(deleteItemsAtIndexPaths:),
-    @selector(moveItemAtIndexPath:toIndexPath:)};
-    
-    for (int i = 0; i < sizeof(selectors)/sizeof(SEL); i++) {
-        SEL originalSelector = selectors[i];
-        SEL swizzledSelector = NSSelectorFromString([@"ar_" stringByAppendingString:NSStringFromSelector(originalSelector)]);
-        
-        Method originalMethod = class_getInstanceMethod(self, originalSelector);
-        Method swizzledMethod = class_getInstanceMethod(self, swizzledSelector);
-        
-        method_exchangeImplementations(originalMethod, swizzledMethod);
-    }
++ (void)load {
+	SEL selectors[] =
+	{@selector(registerNib:forCellWithReuseIdentifier:),
+		@selector(registerClass:forCellWithReuseIdentifier:),
+		@selector(reloadData),
+		@selector(reloadSections:),
+		@selector(deleteSections:),
+		@selector(moveSection:toSection:),
+		@selector(reloadItemsAtIndexPaths:),
+		@selector(deleteItemsAtIndexPaths:),
+		@selector(moveItemAtIndexPath:toIndexPath:)};
+	
+	for (int i = 0; i < sizeof(selectors)/sizeof(SEL); i++) {
+		SEL originalSelector = selectors[i];
+		SEL swizzledSelector = NSSelectorFromString([@"ar_" stringByAppendingString:NSStringFromSelector(originalSelector)]);
+		
+		Method originalMethod = class_getInstanceMethod(self, originalSelector);
+		Method swizzledMethod = class_getInstanceMethod(self, swizzledSelector);
+		
+		method_exchangeImplementations(originalMethod, swizzledMethod);
+	}
 }
 
 - (CGSize)ar_sizeForCellWithIdentifier:(NSString *)identifier indexPath:(NSIndexPath *)indexPath configuration:(void (^)(__kindof UICollectionViewCell *))configuration {
