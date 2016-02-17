@@ -14,7 +14,8 @@
     // Initialization code
     self.contentView.backgroundColor = [UIColor whiteColor];
     
-    self.contentLabel.preferredMaxLayoutWidth = [UIScreen mainScreen].bounds.size.width - 20;
+    //minus 20 pixel is cell's width, cell's width minus 16 pixel is contentLabel's width
+    self.contentLabel.preferredMaxLayoutWidth = [UIScreen mainScreen].bounds.size.width - 20 - 16;
 }
 
 -(void)filleCellWithFeed:(FeedModel *)feed
