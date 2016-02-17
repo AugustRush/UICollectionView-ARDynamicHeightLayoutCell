@@ -13,6 +13,8 @@
 - (void)awakeFromNib {
     // Initialization code
     self.contentView.backgroundColor = [UIColor whiteColor];
+    
+    self.contentLabel.preferredMaxLayoutWidth = [UIScreen mainScreen].bounds.size.width - 20;
 }
 
 -(void)filleCellWithFeed:(FeedModel *)feed
