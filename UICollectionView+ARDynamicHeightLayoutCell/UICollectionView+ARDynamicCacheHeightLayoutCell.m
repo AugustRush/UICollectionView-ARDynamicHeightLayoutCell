@@ -176,20 +176,26 @@ typedef NS_ENUM(NSUInteger, ARDynamicSizeCaculateType) {
 
 - (void)ar_reloadSections:(NSIndexSet *)sections {
   [sections enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
-    [[self sizeCache] replaceObjectAtIndex:idx withObject:@[].mutableCopy];
+    if (idx < [self sizeCache].count) {
+      [[self sizeCache] replaceObjectAtIndex:idx withObject:@[].mutableCopy];
+    }
   }];
   [self ar_reloadSections:sections];
 }
 
 - (void)ar_deleteSections:(NSIndexSet *)sections {
   [sections enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
-    [[self sizeCache] removeObjectAtIndex:idx];
+    if (idx < [self sizeCache].count) {
+      [[self sizeCache] removeObjectAtIndex:idx];
+    }
   }];
   [self ar_deleteSections:sections];
 }
 
 - (void)ar_moveSection:(NSInteger)section toSection:(NSInteger)newSection {
-  [[self sizeCache] exchangeObjectAtIndex:section withObjectAtIndex:newSection];
+    if (section < [self sizeCache].count && newSection < [self sizeCache].count) {
+      [[self sizeCache] exchangeObjectAtIndex:section withObjectAtIndex:newSection];
+    }
   [self ar_moveSection:section toSection:newSection];
 }
 
@@ -198,8 +204,10 @@ typedef NS_ENUM(NSUInteger, ARDynamicSizeCaculateType) {
 - (void)ar_deleteItemsAtIndexPaths:(NSArray *)indexPaths {
   [indexPaths enumerateObjectsUsingBlock:^(NSIndexPath *obj, NSUInteger idx,
                                            BOOL *stop) {
-    NSMutableArray *section = [self sizeCache][obj.section];
-    [section removeObjectAtIndex:obj.row];
+    if ([self.sizeCache count] > obj.section) {
+      NSMutableArray *section = [self sizeCache][obj.section];
+      [section removeObjectAtIndex:obj.row];
+    }
   }];
   [self ar_deleteItemsAtIndexPaths:indexPaths];
 }
