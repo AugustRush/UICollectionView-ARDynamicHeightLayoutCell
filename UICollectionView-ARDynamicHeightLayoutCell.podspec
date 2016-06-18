@@ -4,8 +4,8 @@ Pod::Spec.new do |s|
   s.summary      = "Automatically UICollectionViewCell size calculating."
   s.homepage     = "https://github.com/AugustRush/UICollectionView-ARDynamicHeightLayoutCell"
   s.license      = "MIT"
-  s.author             = { "August" => "liupingwei30@gmail.com" }
-  s.authors            = { "August" => "liupingwei30@gmail.com" }
+  s.author             = { "August" => "819373341@qq.com" }
+  s.authors            = { "August" => "819373341@qq.com" }
   s.platform     = :ios, "6.0"
   s.source       = { :git => "https://github.com/AugustRush/UICollectionView-ARDynamicHeightLayoutCell.git", :tag => "1.0.3" }
   s.source_files  = "UICollectionView+ARDynamicHeightLayoutCell", "UICollectionView+ARDynamicHeightLayoutCell/**/*.{h,m}"
